@@ -1,0 +1,70 @@
+@import '_base';
+
+/* Mixins
+ --------------------------------------------- */
+// mediaQuery
+@mixin max-screen($break-point: 768px) {
+  @media screen and (max-width: $break-point) {
+    @content;
+  }
+}
+
+/* Layouts
+ --------------------------------------------- */
+.ly_body {
+  max-width: 1080px;
+  width: 100%;
+  margin: 20px auto;
+  padding: 0 15px;
+}
+
+/* Blocks
+ --------------------------------------------- */
+.bl_stickyTable {
+  $wrp: '.bl_stickyTable';
+  width: 100%;
+  margin: 0 auto;
+  table-layout: fixed;
+  border-collapse: separate;
+  @include max-screen() {
+    width: 640px;
+    padding-right: 15px;
+  }
+  tr {
+    &:last-child {
+      #{$wrp}_stickyCell,
+      #{$wrp}_valueCell {
+        border-bottom: 1px solid #999;
+      }
+    }
+  }
+  &_stickyCell,
+  &_valueCell {
+    border: 1px solid #999;
+    border-bottom: none;
+    padding: 10px;
+  }
+  &_stickyCell {
+    background-color: #ededed;
+    font-weight: bold;
+    width: 200px;
+    @include max-screen() {
+      position: sticky;
+      left: 0;
+      z-index: 1;
+    }
+  }
+  &_valueCell {
+    border-left: none;
+    background-color: #fff;
+  }
+}
+
+/* Helpers
+ --------------------------------------------- */
+.sp_overContainer {
+  @include max-screen() {
+    width: calc(100% + 15px) !important;
+    overflow-x: auto !important;
+  }
+}
